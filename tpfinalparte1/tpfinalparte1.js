@@ -8,7 +8,6 @@ let imagenes;
 let textos; 
 let sonido;
 
-
 function preload() {
     //carga imagenes 
   sonido = loadSound('data/sonido.mp3');
@@ -17,7 +16,6 @@ function preload() {
     imagenes [i] = loadImage ('data/img-' + i + '.jpg'); 
    }  
   
-    //carga lineas de texto
   textos = [];
   for (let t = 0; t < 27; t ++) {
     textos = loadStrings ("data/textos.txt") ; 
@@ -30,16 +28,14 @@ function setup() {
    textAlign(CENTER);
 
 }
-
 function mostrarEstado(estado) {
-  textSize(25);
-  fill(4, 5, 90);
+  textSize(20);
+  stroke(255,0,9);
+  fill(255,0,9);
   
     if (estado < imagenes.length && imagenes[estado]) {
     image(imagenes[estado], 0, 0, 640, 480);
-  }
-  
-   
+  } 
   if (estado < textos.length) {
     text(textos[estado], 300, 100); 
     
@@ -81,7 +77,8 @@ function mostrarEstado(estado) {
 function draw() { 
    background(220);
    textSize(25);
-   fill(4, 3, 90);
+   stroke(255,0,9);
+   fill(255,0,9);
    mostrarEstado(estado);  
    circulodecontinuar(580, 420, 40);
 
@@ -189,56 +186,44 @@ sonido.play();
   } else if (estado == 21 && mouseEnCirculo( 580, 420, 40)) {
     estado = 25 
     
-  
+  // creditos
    } else if (estado == 22 && mouseEnCirculo(90,410,40)) {
-    estado = 26; // Ir a la página de créditos
-    
-  } else if (estado == 23 && mouseEnCirculo(90, 410, 40)) {
-    estado = 26; // Ir a la página de créditos
-    
-  } else if (estado == 24 && mouseEnCirculo(90, 410, 40)) {
-    estado = 26; // Ir a la página de créditos
-    
-  } else if (estado == 21 && mouseEnCirculo(90, 410, 40)) {
+    estado = 26; 
+   } else if (estado == 23 && mouseEnCirculo(90, 410, 40)) {
+    estado = 26; 
+   } else if (estado == 24 && mouseEnCirculo(90, 410, 40)) {
+    estado = 26; 
+   } else if (estado == 21 && mouseEnCirculo(90, 410, 40)) {
     estado = 25;
-        
-  } else if (estado == 26 && mouseEnCirculo(580, 420, 40)) {
-    estado = 0 ;
-  
+   } else if (estado == 26 && mouseEnCirculo(580, 420, 40)) {
+    estado = 0 ;  
   }
  
 }
   //funciones crean botones
-   
-   function mouseEnCirculo(x, y, r) { //Evento de click
+    function mouseEnCirculo(x, y, r) { //Evento de click
   return dist(mouseX, mouseY, x, y) <= r;
 }
-
 function circulodecontinuar(h, i, j) {
   stroke(255);
-  fill(227, 124, 124);
+  fill(255);
   circle(h, i, j);
 }
-
 function circuloa(h, i, j) {
   stroke(255);
-  fill(224, 0, 245);
+  fill(255);
   circle(h, i, j);
 }
-
 function circulob(h, i, j) {
   stroke(255);
-  fill(224, 0, 245);
+  fill(255);
   circle(h, i, j);
 }
-
-
 function circuloc(h, i, j) {
   stroke(255);
   fill(224, 0, 245);
   circle(h, i, j);
 }
-
 function reiniciarPrograma() {
   estado = 0; 
   
