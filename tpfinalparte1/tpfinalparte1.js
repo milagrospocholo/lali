@@ -1,23 +1,19 @@
-//milagros pocholo joaquin parello
-// comi 4
-
 let anchopantalla = 640;
 let altopantalla = 480;
 let estado = 0;
 let imagenes;
 let textos; 
-let sonido;
+//let sonido;
 
 function preload() {
-    //carga imagenes 
-  sonido = loadSound('data/sonido.mp3');
+  //sonido = loadSound('data/sonido.mp3');
   imagenes = [];
   for (let i = 0; i < 27; i++) {
     imagenes [i] = loadImage ('data/img-' + i + '.jpg'); 
    }  
   
   textos = [];
-  for (let t = 0; t < 27; t ++) {
+  for (let t = 0; t < 23; t ++) {
     textos = loadStrings ("data/textos.txt") ; 
     console.log (t + ":" + textos [t]); 
   }
@@ -30,41 +26,42 @@ function setup() {
 }
 function mostrarEstado(estado) {
   textSize(20);
-  stroke(255,0,9);
-  fill(255,0,9);
+  strokeWeight(4);
+  stroke(0);
+  fill(255);
   
     if (estado < imagenes.length && imagenes[estado]) {
     image(imagenes[estado], 0, 0, 640, 480);
   } 
   if (estado < textos.length) {
     text(textos[estado], 300, 100); 
-    
+
   }
    // Muestra los botones en ciertos estados
   if ([1, 5, 9, 17].includes(estado)) {
     fill(255);
-    text("opcion2", 410, 440, 40);
-    circuloa(410, 410, 40);
-    fill(255);
-    text( "opcion1", 230, 440, 40 );
-    circulob(260, 410, 40);
+    text("opcion2", 400, 410, 90, 30);
+    boton (400, 410, 90, 30);
+    fill(0);
+    text( "opcion1", 200, 410, 90, 30 );
+    boton (200, 410, 90, 30);
   }
   
   
   if (estado === 25) {
     fill(255);
-    text("opcion3", 410, 440, 40);
-    circuloa(410, 410, 40);
+    text("opcion3", 200, 410, 90, 30);
+    boton (200, 410, 90, 30);
     fill(255);
-    text( "opcion2", 230, 440, 40 );
-    circulob(260, 410, 40);
+    text( "opcion2", 310, 410, 90, 30 );
+    boton (310, 410, 90, 30);
     fill(255);
-    text("opcion1", 86,440,40);
-    circuloc(90, 410, 40); // Botón extra solo en el estado 25
+    text("opcion1",90, 410, 90, 30);
+    boton (90, 410, 90, 30); // Botón extra solo en el estado 25
   }
   
   if ([22, 23, 24, 26].includes(estado)){
-    text("Reiniciar", 570, 400); 
+    text("Reiniciar", 530, 400, 100, 30); 
   }
   
  if ([22, 23, 24].includes(estado)){
@@ -80,110 +77,109 @@ function draw() {
    stroke(255,0,9);
    fill(255,0,9);
    mostrarEstado(estado);  
-   circulodecontinuar(580, 420, 40);
+   text ("continuar", 580, 420);
+   boton (530 ,400, 100, 30);
 
    } 
   
   function mousePressed() {
-sonido.play();
+//sonido.play();
 
-  if (estado == 0 && mouseEnCirculo(580, 420, 40)) {
+  if (estado == 0 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 1; 
      
-  } else if (estado == 1 && mouseEnCirculo(410, 410, 40)) {
+  } else if (estado == 1 && mouseEnCirculo(200, 410, 90, 30)) {
     estado = 2; 
     
-  } else if (estado == 1 && mouseEnCirculo(260, 410, 40)) {
+  } else if (estado == 1 && mouseEnCirculo(400, 410, 90, 30)) {
     estado = 3; 
     
-  } else if (estado == 2 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 2 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 4; 
     
-  } else if (estado == 3 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 3 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 4; 
     
-  } else if (estado == 4 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 4 && mouseEnCirculo(530, 400, 100, 30 )) {
     estado = 5; 
     
-  } else if (estado == 5 && mouseEnCirculo(410, 410, 40)) {
+  } else if (estado == 5 && mouseEnCirculo(200, 410, 90, 30)) {
     estado = 6; 
     
-  } else if (estado == 5 && mouseEnCirculo(260, 410, 40)) {
+  } else if (estado == 5 && mouseEnCirculo(400, 410, 90, 30)) {
     estado = 7; 
     
-  } else if (estado == 6 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 6 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 8;
     
-  } else if (estado == 7 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 7 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 8; 
     
-  } else if (estado == 8 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 8 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 9; 
     
-  } else if (estado == 9 && mouseEnCirculo(410, 410, 40)) {
+  } else if (estado == 9 && mouseEnCirculo(200, 410, 90, 30)) {
     estado = 10; 
     
-  } else if (estado == 9 && mouseEnCirculo(260, 410, 40)) {
+  } else if (estado == 9 && mouseEnCirculo(400, 410, 90, 30)) {
     estado = 11; 
     
-  } else if (estado == 10 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 10 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 15; 
     
-  } else if (estado == 11 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 11 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 12; 
     
-  } else if (estado == 12 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 12 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 13 ; 
     
-  } else if (estado == 13 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 13 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 14;
     
-  } else if (estado == 14 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 14 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 17; 
     
-  } else if (estado == 15 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 15 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 16; 
     
-  } else if (estado == 16 && mouseEnCirculo(580, 420, 40)) {
+  } else if (estado == 16 && mouseEnCirculo(530, 400, 100, 30)) {
     estado = 17;
     
-  } else if (estado == 17 && mouseEnCirculo(410, 410, 40)) {
+  } else if (estado == 17 && mouseEnCirculo(200, 410, 90, 30)) {
     estado = 18 ; 
     
-  } else if (estado == 17 && mouseEnCirculo( 260, 410, 40 )) {
+  } else if (estado == 17 && mouseEnCirculo( 400, 410, 90, 30 )) {
     estado = 19 ; 
     
-  } else if (estado == 18 && mouseEnCirculo( 580, 420, 40)) {
+  } else if (estado == 18 && mouseEnCirculo( 530, 400, 100, 30)) {
     estado = 21 ; 
     
-  } else if (estado == 19 && mouseEnCirculo( 580, 420, 40)) {
+  } else if (estado == 19 && mouseEnCirculo( 530, 400, 100, 30)) {
     estado = 20 ;
     
-  } else if (estado == 20 && mouseEnCirculo( 580, 420, 40)) {
+  } else if (estado == 20 && mouseEnCirculo( 530, 400, 100, 30)) {
     estado = 25 ;
     
   } else if (estado == 25 && mouseEnCirculo( 90, 410, 40)) {
     estado = 22 ; 
     
-  } else if (estado == 25 && mouseEnCirculo( 260, 410, 40)) {
+  } else if (estado == 25 && mouseEnCirculo( 400, 410, 90, 30)) {
     estado = 23 ; 
     
-  } else if (estado == 25 && mouseEnCirculo(410,410,40)){
+  } else if (estado == 25 && mouseEnCirculo(200, 410, 90, 30)){
     estado = 24 ; 
     
-  } else if (estado == 22 && mouseEnCirculo( 580, 420, 40)) {
-    estado = 0 ;
+  } else if (estado == 22 && mouseEnCirculo( 530, 400, 100, 30)) {
+ reiniciarPrograma(); 
     
      reiniciarPrograma(); 
-  } else if (estado == 23 && mouseEnCirculo( 580, 420, 40)) {
-    estado = 0 ; 
+  } else if (estado == 23 && mouseEnCirculo( 530, 400, 100, 30)) {
      reiniciarPrograma(); 
      
-  } else if (estado == 24 && mouseEnCirculo( 580, 420, 40)) {
-    estado = 0 ; 
+  } else if (estado == 24 && mouseEnCirculo( 530, 400, 100, 30)) {
      reiniciarPrograma(); 
      
-  } else if (estado == 21 && mouseEnCirculo( 580, 420, 40)) {
+  } else if (estado == 21 && mouseEnCirculo( 530, 400, 100, 30)) {
     estado = 25 
     
   // creditos
@@ -196,7 +192,7 @@ sonido.play();
    } else if (estado == 21 && mouseEnCirculo(90, 410, 40)) {
     estado = 25;
    } else if (estado == 26 && mouseEnCirculo(580, 420, 40)) {
-    estado = 0 ;  
+    reiniciarPrograma(); 
   }
  
 }
@@ -204,28 +200,15 @@ sonido.play();
     function mouseEnCirculo(x, y, r) { //Evento de click
   return dist(mouseX, mouseY, x, y) <= r;
 }
-function circulodecontinuar(h, i, j) {
+
+
+function boton(h, i, ancho, alto) {
   stroke(255);
   fill(255);
-  circle(h, i, j);
+  rect(h, i, ancho, alto); 
 }
-function circuloa(h, i, j) {
-  stroke(255);
-  fill(255);
-  circle(h, i, j);
-}
-function circulob(h, i, j) {
-  stroke(255);
-  fill(255);
-  circle(h, i, j);
-}
-function circuloc(h, i, j) {
-  stroke(255);
-  fill(224, 0, 245);
-  circle(h, i, j);
-}
+
 function reiniciarPrograma() {
   estado = 0; 
-  
-  draw(); 
+   
 }
