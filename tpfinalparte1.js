@@ -1,3 +1,6 @@
+// milagros pocholo , joaquin parello
+//comi 4
+//link del video:
 
 let estado = 0;
 let imagenes;
@@ -19,9 +22,7 @@ function preload() {
 
 function setup() {
   createCanvas(640,480);
-
-   textAlign(CENTER);
-
+  textAlign(CENTER);
 }
 
 function mostrarEstado(estado) {
@@ -29,25 +30,36 @@ function mostrarEstado(estado) {
   strokeWeight(4);
   stroke(0);
   fill(255);
-
   // Mostrar imagen si corresponde
   if (estado < imagenes.length && imagenes[estado]) {
     image(imagenes[estado], 0, 0, 640, 480);
   }
-
-   // Mostrar texto si corresponde
+  
+  textSize(12)
+   if (estado === 1) {
+    text("se va sin despedirse",250,400);
+    text("se despide de la hermana",450,400);
+  } else if (estado === 5) {
+   text("se escapa",250,400);
+   text("ayuda a un hombre herido",450,400);
+  } else if (estado === 9) {
+   text("la princesa se acerca sigilosamente",250,400);
+    text("la princesa se pelea con lady",450,400);
+  } else if (estado === 17) {
+   text("guerra en la aldea",250,400);
+    text("guerra con los jabali",450,400);
+  } else if (estado < textos.length) {
+    
+  }
+//para que el texto se ajuste al alto y ancho de pantalla
   if (estado < textos.length) {
     let texto = textos[estado];
     let margen = 20;  // Margen desde los bordes
     let anchoMaximo = width - 2 * margen; // El ancho máximo disponible
     let altoMaximo = height - 2 * margen; // El alto máximo disponible
-    
-  
-    textFont('Arial'); // Opcional: establecer una fuente
-    textSize(20); // Tamaño de texto
-
-    // Mostrar el texto en múltiples líneas si es necesario
-    text(texto, margen, 100, anchoMaximo, altoMaximo);  // Se ajustará automáticamente el texto en el área disponible
+    textFont('Arial'); 
+    textSize(20); 
+    text(texto, margen, 100, anchoMaximo, altoMaximo);  
   }
 
   // Botones para ciertos estados
@@ -56,10 +68,15 @@ function mostrarEstado(estado) {
 
   if (botonesEstado1.includes(estado)) {
     mostrarBotones([200, 400], ["opcion1", "opcion2"]);
+   
   }
 
   if (estado === 25) {
     mostrarBotones([90, 200, 310], ["opcion1", "opcion2", "opcion3"]);
+    textSize(10);
+    text("lady se arrepiente",140,400);
+    text("la venganza",250,400);
+    text("sanacion",350,400);
   }
 
   if (botonesEstado2.includes(estado)) {
@@ -71,7 +88,6 @@ function mostrarEstado(estado) {
     text("creditos", 100, 400, 40);
   }
 }
-
 // Función para mostrar los botones
 function mostrarBotones(posiciones, textosBotones) {
   for (let i = 0; i < posiciones.length; i++) {
@@ -81,30 +97,28 @@ function mostrarBotones(posiciones, textosBotones) {
   }
 }
 
-
 function draw() { 
   background(220);
    textSize(25);
    strokeWeight(5);
    stroke(255,0,9);
-   // fill(255,0,9);
+  
    mostrarEstado(estado);  
 
-   let estadosConOpciones = [1, 5, 9, 17, 25]; // Los estados donde hay opciones visibles
-   let estadosFinales = [22, 23, 24, 26]; // Los estados finales donde no debe aparecer "continuar"
-
+   let estadosConOpciones = [1, 5, 9, 17, 25]; 
+   let estadosFinales = [22, 23, 24, 26]; 
+   
    if (!estadosConOpciones.includes(estado) && !estadosFinales.includes(estado)) {
      boton(530, 400, 100, 30);
      fill(255, 0, 9); 
      text("continuar", 580, 420);
    }
-
-   } 
+ } 
 
 function mousePressed() {
-sonido.play();
-  if (estado == 0 && mouseEnCirculo(620, 400, 100, 30)) {
+ if (estado == 0 && mouseEnCirculo(620, 400, 100, 30)) {
     estado = 1; 
+    sonido.play();
   } else if (estado == 1 && mouseEnCirculo(200, 410, 90, 30)) {
     estado = 2; 
   } else if (estado == 1 && mouseEnCirculo(400, 410, 90, 30)) {
@@ -168,7 +182,7 @@ sonido.play();
   } else if (estado == 24 && mouseEnCirculo( 500, 400, 100, 30)) {
     reiniciarPrograma(); 
   } 
-  // Aquí asegúrate que la transición a la pantalla de créditos esté bien estructurada
+  //creditos 
   else if (estado == 22 && mouseEnCirculo(100,400,40)) {
     estado = 26; 
   } else if (estado == 23 && mouseEnCirculo(100, 400, 40)) {
@@ -179,20 +193,10 @@ sonido.play();
     reiniciarPrograma(); 
   }
 }
-
-
-
-
-
-
-
-
-
   //funciones crean botones
     function mouseEnCirculo(x, y, r) { //Evento de click
   return dist(mouseX, mouseY, x, y) <= r;
 }
-
 
 function boton(h, i, ancho, alto) {
   stroke(255);
@@ -202,5 +206,5 @@ function boton(h, i, ancho, alto) {
 
 function reiniciarPrograma() {
   estado = 0; 
-   
+   sonido.stop()
 }
