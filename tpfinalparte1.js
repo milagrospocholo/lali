@@ -2,18 +2,15 @@
 let estado = 0;
 let imagenes;
 let textos; 
-//let sonido;
+let sonido;
 
 function preload() {
-  //sonido = loadSound('data/sonido.mp3');
-  
-  
+  sonido = loadSound('data/sonido.mp3');
   imagenes = [];
   for (let i = 0; i < 27; i++) {
     imagenes [i] = loadImage ('data/img-' + i + '.jpg'); 
    }  
-  
-  textos = [];
+    textos = [];
   for (let t = 0; t < 23; t ++) {
     textos = loadStrings ("data/textos.txt") ; 
     console.log (t + ":" + textos [t]); 
@@ -22,9 +19,7 @@ function preload() {
 
 function setup() {
   createCanvas(640,480);
-  // sonido.setVolume(0.5);  // Ajustamos el volumen, si es necesario
-  // sonido.loop();  // Lo ponemos en loop si lo deseas de fondo
-  
+
    textAlign(CENTER);
 
 }
@@ -107,11 +102,7 @@ function draw() {
    } 
 
 function mousePressed() {
-  
-  // if (estado === 0 && !sonido.isPlaying()) {
-  //sonido.play(); // Reproducir sonido al comenzar el primer estado
- // }
-
+sonido.play();
   if (estado == 0 && mouseEnCirculo(620, 400, 100, 30)) {
     estado = 1; 
   } else if (estado == 1 && mouseEnCirculo(200, 410, 90, 30)) {
