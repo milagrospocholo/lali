@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+body{
+    background-color: rgb(26, 16, 114);
+}
+h3,h1{
+    font-family: bangers,serif;
+    background-color: rgb(178, 198, 236);
+    color: rgb(59, 34, 146);
+}
+.card-1{
+    background-color: rgb(26, 115, 167);
+
+}
+.card-2{
+    background-color: rgb(18, 139, 143);
+}
+.cardtitulo-1{
+   color: ghostwhite;
+}
+.cardtitulo-2{
+    color: aliceblue;
+}
+.texto-1{
+    color: aliceblue;
+}
+.texto-2{
+    color: aliceblue;
+}
+button{
+    background-color: rgb(234, 255, 114);
+}
