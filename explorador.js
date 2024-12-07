@@ -1,35 +1,44 @@
 class Explorador {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.velY = 0;
-    this.r = 10; 
-    this.hayColision = false; 
+    this.x = x; //posX
+    this.y = y; //posY
+    this.velY = 0; //
+    this.r = 40; // Radio de forma 
+    this.hitboxRadio = 15; 
   }
 
   mostrar() {
-    fill(255, 200, 0);
-    ellipse(this.x, this.y, 20, 20);
+    image(personajeImg, this.x - this.r, this.y - this.r, this.r * 2, this.r * 2); 
+
+      //hitbox marcada
+  // noFill();
+  // stroke(255, 0, 0); // Rojo para la hitbox de colisión
+ //  ellipse(this.x, this.y, this.hitboxRadio * 2, this.hitboxRadio * 2);
   }
 
-  balancearse() {
-    this.velY += 0.5;
-    this.y += this.velY;
+  moverse() {
+    this.velY += 0.5;  // Aumenta la velocidad en el eje Y
+    this.y += this.velY;  
 
-    if (this.y > height) {
-      this.y = height;
-      this.velY = 0;
+// si toca el suelo 
+    if (this.y > height - 80) {
+      this.y = height - 80; // queda en el piso
+      this.velY = 0; //lo deja fijo
+    }
+ // Si el explorador sube demasiado 
+    if (this.y < 0) {
+      juego.pantalla = 'creditos'; 
     }
   }
 
-  // Detectar colisiones con obstáculos
-  verificarColision(obstaculo) {
-    let distancia = dist(this.x, this.y, obstaculo.x, obstaculo.y);
-
-    if (distancia < (this.r + obstaculo.r)) {
-      this.hayColision = true;
-    } else {
-      this.hayColision = false;
-    }
+verificarColision(obstaculo) {
+     
+  return (this.x - obstaculo.x < this.hitboxRadio + obstaculo.hitboxRadio && this.x - obstaculo.x > -(this.hitboxRadio + obstaculo.hitboxRadio)) && 
+  (this.y - obstaculo.y < this.hitboxRadio + obstaculo.hitboxRadio && this.y - obstaculo.y > -(this.hitboxRadio + obstaculo.hitboxRadio));
+          }
+  saltar() {
+      
+    this.velY = -10;
+    salto.play(); 
   }
 }

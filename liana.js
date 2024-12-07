@@ -1,25 +1,30 @@
-let lianasImg
-
-function preload(){
-lianasImg= loadImage("data/liana1.png");
-lianasImg = loadImage("data/liana2.png");
-lianasImg = loadImage("data/liana3.png");
-}
-  
- class Liana {
+class Liana {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.velocidadBalanceo = 0.05;
-    
+    this.x = x; //posX
+    this.y = y; //posY
+   this.img = random(3); 
+
+ 
+if (this.img < 1) {
+  this.img = lianasImg[0];  
+} else if (this.img < 2) {
+  this.img = lianasImg[1]; 
+} else {
+  this.img = lianasImg[2]; 
+}
   }
 
   mostrar() {
-    stroke(100, 200, 100);
-  image(lianasImg, this.x, 0, this.x, this.y);
+    image(this.img, this.x, this.y, 80, 600);
   }
-  
-  balancearliana(){
-  
+ 
+  mover(velocidad) {
+   // Mueve la liana hacia la izquierda
+    this.x -= velocidad;
+   // Si la liana sale del borde izquierdo de la pantalla, se reposiciona en el borde derecho y se le da una nueva posición aleatoria en Y
+    if (this.x < -60) {
+      this.x = width + 50; 
+      this.y = random(-200, -50);
   }
+}
 }
