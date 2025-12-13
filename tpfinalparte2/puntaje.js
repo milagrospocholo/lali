@@ -1,24 +1,17 @@
+// se encarga de calcular el puntaje del final 
 class Puntaje {
-  constructor(valoresPelo, valoresMaq, valoresVestido) {
-    this.valoresPelo = valoresPelo;
-    this.valoresMaq = valoresMaq;
-    this.valoresVestido = valoresVestido;
-    
+  constructor() {
+
+    this.valoresPelo = [3, 1, 2];      // colorado, marrón, rubio
+    this.valoresMaq = [1, 3, 2];       // marrones, azules, verdes
+    this.valoresVestido = [3, 2, 1];   // blanco, azul, rosa
   }
 
-  calcular(peloSel, maqSel, vestidoSel) {
-    let valores = [
-      this.valoresPelo[peloSel],
-      this.valoresMaq[maqSel],
-      this.valoresVestido[vestidoSel]
-    ];
-
-    let total = 0;
-
-    for (let i = 0; i < valores.length; i++) {
-      total += valores[i];
-    }
-
-    return total;
+  calcular(pelo, maq, vestido) {
+    return (
+      this.valoresPelo[pelo - 1] +
+      this.valoresMaq[maq - 1] +
+      this.valoresVestido[vestido - 1]
+    );
   }
 }

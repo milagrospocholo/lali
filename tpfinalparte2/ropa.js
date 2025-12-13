@@ -1,17 +1,15 @@
-
-//Una clase es un modelo para crear objetos que tienen propiedades y funciones 
-//internas.
+//posicion de los vestidos
 class Ropa {
   constructor(x, y) {
-      // Posición donde se va a dibujar el vestido elegido
     this.x = x;
     this.y = y;
 
     this.vestidoSeleccionado = 0;
-//Arreglo con las imágenes de los vestidos
+
+//arreglo de imagenes de cada vestido 
     this.vestidos = [vestido1, vestido2, vestido3];
 
-    // Coordenadas y tamaños de los iconos que se ven abajo
+//cada objeto define no son botones reales son zonas de clicks
    this.iconos = [
   { x: 50,  y: 380, w: 90, h: 120 },
   { x: 170, y: 380, w: 90, h: 120 },
@@ -19,15 +17,14 @@ class Ropa {
 ];
 
   } 
-// dibuja el vestido elegido 
+  //dibuja los vestidos seleccionados arriaba de la princesa 
   mostrar() {
     if (this.vestidoSeleccionado > 0) {
       let img = this.vestidos[this.vestidoSeleccionado - 1];
       image(img, this.x, this.y);
     }
   }
-
-//dibuja los iconos de las opciones
+// muestra la opciones que son los iconos de los vestidos 
   mostrarOpciones() {
     for (let i = 0; i < this.vestidos.length; i++) {
       let ico = this.iconos[i];
@@ -52,11 +49,11 @@ class Ropa {
     }
   }
 
-// detecta el click y seleciona el vestido
   seleccionar() {
+    //recorre todas la zonas de clcks 
     for (let i = 0; i < this.iconos.length; i++) {
       let ico = this.iconos[i];
-
+// detecta los clicks verifica si el mouse esta adentro del rectangulo
       if (
         mouseX > ico.x &&
         mouseX < ico.x + ico.w &&

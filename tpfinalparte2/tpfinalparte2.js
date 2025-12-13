@@ -1,7 +1,6 @@
-//milagros pocholo
-//comi 5
-//link del video: https://youtu.be/nOSw5czAmdw
-
+//pocholo milagros
+//comi 5 
+//link del video: https://youtu.be/ZKku_PoK8nk
 let juego;
 let fondoImg, princesaImg;
 let maq1Img, maq2Img, maq3Img;

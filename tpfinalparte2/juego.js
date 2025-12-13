@@ -1,57 +1,46 @@
+// que pantalla estoy/ cordenadas
 class Juego {
   constructor() {
-    this.estado = 0;
+    this.estado = 0; // 0 = inicio, 1 = maquillaje, 2 = pelo, 3 = ropa
     this.princesa = new Princesa(200, 80);
     this.rostro = new Rostro(this.princesa);
     this.ropa = new Ropa(200, 80);
-
-    // ⭐ PUNTAJE LISTO, YA CORRECTO
-    this.puntaje = new Puntaje(
-      [0, 2, 4, 5],   // valores del pelo
-      [0, 1, 2, 3],   // valores del maquillaje
-      [0, 3, 2, 4, 5] // valores del vestido
-    );
+    this.puntaje = new Puntaje();
   }
-
+//Según el estado, muestra una pantalla distinta
   mostrar() {
     if (this.estado == 0) {
       this.pantallaInicio();
-
     } else if (this.estado == 1) {
       this.rostro.mostrarMaquillaje();
-
     } else if (this.estado == 2) {
       this.rostro.mostrarPeinado();
       this.botonVolver();
-
     } else if (this.estado == 3) {
       this.mostrarRopa();
       this.botonVolver();
       this.botonFinalizar();
-
     } else if (this.estado == 4) {
       image(ganaste, 0, 0, width, height);
       this.botonReiniciar();
       this.botonCreditos();
-
     } else if (this.estado == 5) {
       image(perdiste, 0, 0, width, height);
       this.botonReiniciar();
       this.botonCreditos();
-
     } else if (this.estado == 6) {
       image(creditos, 0, 0, width, height);
       this.botonVolverFinal();
     }
   }
-
+//vuelve todo al estado cero se usa vuando tocas el boton volver
   reiniciarJuego() {
     this.estado = 0;
     this.rostro.maqSeleccionado = 0;
     this.rostro.peloSeleccionado = 0;
     this.ropa.vestidoSeleccionado = 0;
   }
-
+  //solo dibuja los botones
   botonCreditos() {
     fill(255, 200);
     rect(width/2 - 100, height - 200, 200, 50, 20);
@@ -69,6 +58,7 @@ class Juego {
     textAlign(CENTER, CENTER);
     text("Volver", width/2, height - 90);
   }
+
 
   botonReiniciar() {
     fill(255, 200);
@@ -96,7 +86,7 @@ class Juego {
     textAlign(CENTER, CENTER);
     text("Finalizar", 230, 40);
   }
-
+// mustra todo lo que apareces en la pantalla inicial
   pantallaInicio() {
     textAlign(CENTER);
     textSize(28);
@@ -105,7 +95,7 @@ class Juego {
     text(
       "Elige cuidadosamente la ropa que se pondrá\n la princesa para enamorar al sastresillo valiente.",
       width / 2, height / 2 - 100
-    );
+      );
 
     text("\n Si a este no le gusta, pierdes.", width / 2, height / 2 - 60);
 
@@ -115,7 +105,7 @@ class Juego {
     textSize(28);
     text("Comenzar", width / 2, height / 2 + 40);
   }
-
+// muestra todo lo que es la ropa, rostro, princesa
   mostrarRopa() {
     this.princesa.mostrar();
     this.rostro.mostrarSeleccion();
@@ -124,7 +114,8 @@ class Juego {
   }
 
   mousePresionado() {
-
+// aca controlamos los clicks del juego
+    // botón volver
     if (mouseX > 20 && mouseX < 140 && mouseY > 20 && mouseY < 60) {
       if (this.estado == 2) {
         this.estado = 1;
@@ -143,7 +134,7 @@ class Juego {
         mouseX < width / 2 + 100 &&
         mouseY > height / 2 &&
         mouseY < height / 2 + 60
-      ) {
+        ) {
         this.estado = 1;
       }
       return;
@@ -174,12 +165,13 @@ class Juego {
     // ropa
     if (this.estado == 3) {
 
+      // botón finalizar
       if (
         mouseX > 160 &&
         mouseX < 300 &&
         mouseY > 20 &&
         mouseY < 60
-      ) {
+        ) {
         let puntaje = this.calcularPuntaje();
 
         if (puntaje >= 7) {
@@ -192,6 +184,7 @@ class Juego {
         return;
       }
 
+      // seleccionar vestido
       let antes = this.ropa.vestidoSeleccionado;
       this.ropa.seleccionar();
       if (this.ropa.vestidoSeleccionado != antes) {
@@ -200,52 +193,55 @@ class Juego {
       return;
     }
 
-    // final
+    // pantalla final (ganaste o perdiste)
+    // pantalla final (ganaste o perdiste)
     if (this.estado == 4 || this.estado == 5) {
 
+      // Botón volver a jugar
       if (
         mouseX > width/2 - 120 &&
         mouseX < width/2 + 120 &&
         mouseY > height - 120 &&
         mouseY < height - 60
-      ) {
+        ) {
         sonidoVolver.play();
         this.reiniciarJuego();
       }
 
+      // Botón créditos
       if (
         mouseX > width/2 - 100 &&
         mouseX < width/2 + 100 &&
         mouseY > height - 200 &&
         mouseY < height - 150
-      ) {
+        ) {
         sonidoClick.play();
         this.estado = 6;
       }
 
       return;
     }
-
-    // créditos
+    // pantalla de créditos
     if (this.estado == 6) {
       if (
         mouseX > width/2 - 120 &&
         mouseX < width/2 + 120 &&
         mouseY > height - 120 &&
         mouseY < height - 60
-      ) {
+        ) {
         sonidoVolver.play();
         this.reiniciarJuego();
       }
       return;
     }
   }
-
+// llama a la clase puntaje y al final devuelve un numero que decide al final
   calcularPuntaje() {
-    return this.puntaje.calcular(
-      this.rostro.peloSeleccionado,
-      this.rostro.maqSeleccionado,
-      this.ropa.vestidoSeleccionado
-    );
-  }
+  return this.puntaje.calcular(
+    this.rostro.peloSeleccionado,
+    this.rostro.maqSeleccionado,
+    this.ropa.vestidoSeleccionado
+  );
+}
+
 }
